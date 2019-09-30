@@ -4,6 +4,11 @@
 # Zplug plugins #
 #################
 
+# NVM (should be as early as possible)
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
+zplug "lukechilds/zsh-nvm"
+
 # Pure theme
 zplug mafredri/zsh-async, from:github
 zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
@@ -11,6 +16,9 @@ zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 # FZF
 zplug "junegunn/fzf", as:command, hook-build:"./install --bin", use:"bin/fzf"
 zplug "junegunn/fzf", use:"shell/*.zsh"
+
+# Enhancd
+zplug "b4b4r07/enhancd", use:init.sh
 
 # Misc.
 zplug "eventi/noreallyjustfuckingstopalready"

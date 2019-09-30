@@ -11,7 +11,12 @@ fi
 export CLICOLOR=1 # ls colourful
 
 # Editor
-export EDITOR="vim -f"
+export EDITOR="nvim"
+
+# Enhancd
+export ENHANCD_FILTER=fzf
+ENHANCD_DOT_ARG=.
+ENHANCD_DOT_SHOW_FULLPATH=1
 
 # FZF
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --color=always'
@@ -27,4 +32,4 @@ export PAGER='less'
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # Utilities
-export ANSIWEATHERRC=$DOTFILES/profile.d/ansiweatherrc # Ansiweather
+

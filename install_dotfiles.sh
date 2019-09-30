@@ -50,7 +50,13 @@ install_ext "$HOME" "local"
 # Install .symlink files
 echo "Installing symlinked files..."
 echo
-install_ext "$HOME" "symlink" "ln -s"
+install_ext "$HOME" "symlink" "ln"
+
+# Install some special files...
+echo "Installing other (e.g. XDG-base ~/.config) files..."
+echo
+mkdir -p $HOME/.config/nvim/
+cp "$DOTFILES"/vim.d/nvim.local.config $HOME/.config/nvim/init.vim
 
 
 ############

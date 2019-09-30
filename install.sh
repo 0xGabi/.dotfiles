@@ -17,10 +17,10 @@ case "$SHELL_NAME" in
         echo "install.sh must be run under either bash or zsh."
         exit 1
 esac
-DOTFILES_DIR=$(dirname $SCRIPT_LOC)
+export DOTFILES=$(dirname $SCRIPT_LOC)
 
 # Move to the root location of where the dotfiles repo was cloned to
-cd $DOTFILES_DIR
+cd $DOTFILES
 
 # Source utilities
 if [[ -d ./utility.d ]]; then
@@ -32,6 +32,14 @@ fi
 # Make sure some particular files exist
 touch $HOME/.bash_profile
 touch $HOME/.bashrc
+
+# Ask for the administrator password upfront
+echo "---------------------------------------------"
+echo "| Some parts require admin access to install|"
+echo "---------------------------------------------"
+echo
+sudo -v
+
 
 ############
 # OS setup #
@@ -61,8 +69,6 @@ source ./install_language.sh
 # Dotfiles setup #
 ##################
 
-export DOTFILES=$(pwd)
-
 echo "------------------------------"
 echo "| Installing local dotfiles |"
 echo "------------------------------"
@@ -71,6 +77,17 @@ source ./install_dotfiles.sh
 
 # Set up the environment to point to where the dotfiles are located
 echo "export DOTFILES=$DOTFILES" >> $HOME/.init_env
+
+
+#############
+# Vim setup #
+#############
+
+echo "------------------"
+echo "| Installing vim |"
+echo "------------------"
+echo
+source ./install_vim.sh
 
 
 ##############
@@ -82,8 +99,9 @@ echo "| Setting up the user |"
 echo "-----------------------"
 echo
 echo "Creating local file structure..."
-mkdir $HOME/Development
-mkdir $HOME/Development/github
+mkdir $HOME/Code
+mkdir $HOME/Code/github
+
 
 ###############
 # Shell setup #
@@ -112,13 +130,17 @@ echo
 echo "All done! Phew, thanks for waiting :)."
 echo "There's a few manual steps left, that you'll need to finish by yourself:"
 echo
+echo "  - Please run ':call dein#install()' in a vim instance to install vim plugins"
+echo "  - Please add '0 10 * * 5 find $VIM_UNDO_DIR -type f -mtime +90 -delete' to your crontab"
 echo "  - Please install the tmux plugins by invoking PREFIX+I (see https://github.com/tmux-plugins/tpm#installing-plugins)"
 echo "  - Please set up your git user config (see https://help.github.com/articles/setting-your-username-in-git/)"
 echo "  - Please set up SSH keys for Github by visiting https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/"
 echo "  - Please set up GPG keys for Github by visiting https://help.github.com/articles/signing-commits-with-gpg/"
+echo "  - Please set up your ~/.netrc config"
 if is_osx; then
     echo "  - Some macOS-specific manual setup:"
     echo "    - Some homebrewed apps may require manual setup, please see the logs above"
+    echo "    - Configure GPG to work with pinentry-mac (see https://gist.github.com/bmhatfield/cc21ec0a3a2df963bffa3c1f884b676b#gistcomment-2165971)"
     echo "    - Set up Better Touch Tool to use the saved preferences at $DOTFILES/osx.d/bettertouchtool/ by importing the preferences"
     echo "    - Set up iterm2 to use the saved preferences at $DOTFILES/osx.d/iterm2/"
     echo "    - Set up karabiner to use the saved preferences at $DOTFILES/osx.d/karabiner/ by copying the folder into ~/.config/karabiner/"

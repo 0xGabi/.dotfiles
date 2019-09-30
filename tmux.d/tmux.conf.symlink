@@ -17,8 +17,8 @@ bind % split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
 
 # Map splits according to NERDTree's bindings and remap overriden bindings to uppercase
-bind i split-window -v -c "#{pane_current_path}"
-bind s split-window -h -c "#{pane_current_path}"
+# bind i split-window -v -c "#{pane_current_path}"
+# bind s split-window -h -c "#{pane_current_path}"
 
 # Map 'g' key to choose windows visually
 bind g choose-tree
@@ -29,6 +29,13 @@ bind r source-file $HOME/.tmux.conf
 # Map shift arrow to switch windows
 bind -n S-Left  previous-window
 bind -n S-Right next-window
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
 
 # Map copy mode
 bind v copy-mode
@@ -42,7 +49,7 @@ set -g mouse on # Enable mouse control
 set -g focus-events on # Enable focus-events in supported terminals
 set -g base-index 1 # Start window numbering from 1
 setw -g pane-base-index 1 # Start pane numbering from 1
-set -g escape-time 1 # Shorten command delay
+set -sg escape-time 0 # Shorten command delay (http://superuser.com/a/252717/65504)
 set -g allow-rename off # Don't rename windows automatically after commands
 set -g history-limit 10000 # Keep 10000 history entries
 setw -g monitor-activity on # Show messages from other windows
@@ -63,9 +70,6 @@ bind -T copy-mode-vi Enter send -X copy-pipe "pbcopy" # Enter is same as 'y'
 
 # Enable mouse copy
 bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe "pbcopy"
-
-# Address vim mode switching delay (http://superuser.com/a/252717/65504)
-set -s escape-time 0
 
 
 ##### Plugins #####

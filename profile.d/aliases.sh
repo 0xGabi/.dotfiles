@@ -27,6 +27,8 @@ alias cd..='cd ..'
 alias po='popd'
 alias pu='pushd'
 alias r='ranger_cd'
+alias v='fasd_fzf_vim'
+alias z='fasd_fzf_cd'
 alias cdgithub='cd $HOME/Development/github'
 
 # File search
@@ -35,20 +37,22 @@ alias ff='fd' # Find file recursively
 alias ffe='fd -e' # Find file recursively via extension
 alias ffa='fd -HI' # Find all files, including hidden and ignored
 
-alias ss='grep -rniEI --color=auto' # Search string
-alias ggs='git grep -niEI --color=auto' # Search string respective to git
+alias sd=fasd_fzf_sd # Select file via fasd + fzf
+alias sf=fasd_fzf_sf # select directory via fasd + fzf
+alias ggs='git grep -niEI --color=auto ' # Search string, respecting gitignore files
+alias ss='rg -S --sort-files --pretty --color=auto --no-ignore-vcs' # Search string ignoring VCS ignore files
 
 # Resources
 alias top='htop'
 alias df='df -kh'
 alias du='du -kh'
-alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
+alias psg='ps aux | ss'
 alias killps='sudo kill -9'
 
 # Etc
 alias _='sudo'
-alias cp='cp -i'
 alias e='$EDITOR'
+alias cp='cp -i'
 alias ln='ln -i'
 alias mkdir='mkdir -pv'
 alias mv='mv -i'

@@ -13,16 +13,10 @@ echo
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
-# Ask for the administrator password upfront
-sudo -v
-
 
 #################
 # General UI/UX #
 #################
-
-# Disable transparency in the menu bar and elsewhere on Yosemite
-defaults write com.apple.universalaccess reduceTransparency -bool true
 
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
@@ -40,6 +34,15 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+
+###########
+# Devices #
+###########
+
+# Enable full keyboard access for all controls
+# (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 
 ##########
@@ -90,6 +93,9 @@ defaults write com.apple.dock mru-spaces -bool false
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
+# Speed hide of Dock
+defaults write com.apple.dock autohide-time-modifier -float 0.1
+
 # Add a spacer to the left side of the Dock (where the applications are)
 #defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
 # Add a spacer to the right side of the Dock (where the Trash is)
@@ -124,6 +130,15 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
+# Disable AutoFill
+defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+defaults write com.apple.Safari AutoFillPasswords -bool false
+defaults write com.apple.Safari AutoFillCreditCardData -bool false
+defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+
+# Warn about fraudulent websites
+defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
+
 
 ####################
 # Activity Monitor #
@@ -140,12 +155,36 @@ defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 
+###############################################################################
+# Mac App Store                                                               #
+###############################################################################
+
+# Enable the automatic update check
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+# Download newly available updates in background
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+
+# Install System data files & security updates
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+
+# Turn on app auto-update
+defaults write com.apple.commerce AutoUpdate -bool true
+
+
 ##########
 # Photos #
 ##########
 
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+
+###################
+# XCode utilities #
+###################
+
+# sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
 
 
 ############
@@ -158,7 +197,8 @@ echo
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Get some nice brews
-brew install --with-default-names \
+brew install \
+    coreutils \
     findutils \
     gnu-sed \
     gnu-which \
@@ -169,7 +209,6 @@ brew install \
     ack \
     ag \
     ansifilter \
-    ansiweather \
     bash \
     binutils \
     colordiff \
@@ -179,129 +218,126 @@ brew install \
     diff-so-fancy \
     diffutils \
     direnv \
-    docker-compose \
-    docker-machine \
-    erlang \
     emojify \
     fasd \
     fd \
     ffmpeg \
     fortune \
-    gifsicle \
     git \
-    git-extras \
-    git-lfs \
     gnupg2 \
     gnu-tar \
     gpg \
-    go \
     grc \
     gzip \
-    heroku \
-    heroku-toolbelt \
-    htop \
-    hub \
-    imagemagick \
-    iina \
-    locateme \
-    mercurial \
-    mongodb \
-    mtr \
-    neovim \
-    nmap \
-    openssl \
-    parallel \
-    perl \
-    pgcli \
-    postgresql \
     pstree \
-    pyenv \
-    pyenv-virtualenv \
-    ranger \
     rename \
-    rmtrash \
     tree \
     watch \
     wdiff \
-    wifi-password \
-    wget \
-    vim \
+    wifi-password
+
+############
+#   TODO   #
+############
+
+    # docker-compose \
+    # docker-machine \
+    # editorconfig \
+    # erlang \
+    # git-extras \
+    # git-lfs \
+    # go \
+    # htop \
+    # hub \
+    # mercurial \
+    # mongodb \
+    # mtr \
+    # nmap \
+    # openssl \
+    # parallel \
+    # perl \
+    # pinentry-mac \
+    # pgcli \
+    # postgresql \
+    # pyenv \
+    # pyenv-virtualenv \
+    # readline \
+    # ripgrep \
+    # rmtrash \
+    # wget
 
 brew cask install \
-    aegisub \
-    alfred \
-    anki \
     appcleaner \
-    arq \
-    bartender \
     bettertouchtool \
-    beyond-compare \
-    brave \
-    charles \
+    brave-browser \
     cheatsheet \
-    chrome-devtools \
-    chromium \
-    cyberduck \
-    discord \
-    docker \
-    dropbox \
-    fantastical \
-    firefox \
-    flow \
+    evernote \
     flux \
-    forklift \
-    font-office-code-pro \
-    font-sourcecodepro-nerd-font-mono \
-    franz \
-    ganache \
-    gimp \
     gitter \
-    google-chrome \
     gpg-suite \
-    grandperspective \
     haptic-touch-bar \
+    iina \
     iterm2 \
     karabiner-elements \
     keybase \
-    linphone \
     little-snitch \
     macdown \
-    macs-fan-control \
-    mountain-duck \
-    namebench \
-    notion \
-    numi \
-    omnifocus \
     onyx \
-    opera \
-    paragon-ntfs \
-    private-internet-access \
-    rescuetime \
+    omnifocus \
     rocket-chat \
     signal \
     skype \
     spectacle \
-    steam \
-    telegram \
     the-unarchiver \
     time-out \
-    transmission \
     vimr \
     vlc \
-    virtualbox \
-    xquartz \
-    zoomus \
-    1password
+    virtualbox
+
+############
+#   TODO   #
+############
+
+    # 1password \
+    # alfred \
+    # anki \
+    # bartender \
+    # beyond-compare \
+    # charles \
+    # chrome-devtools \
+    # chromium \
+    # cyberduck \
+    # discord \
+    # docker \
+    # dropbox \
+    # fantastical \
+    # forklift \
+    # franz \
+    # ganache \
+    # google-chrome \
+    # notion \
+    # macs-fan-control \
+    # mountain-duck \
+    # opera \
+    # private-internet-access \
+    # telegram \
+    # transmission \
+    # zoomus
 
 # Install custom taps
 brew tap dteoh/sqa
 brew cask install slowquitapps
 
-defaults write com.dteoh.SlowQuitApps delay -int 1000
+brew tap caskroom/fonts
+brew cask install \
+    font-fira-code \
+    font-office-code-pro \
+    font-sourcecodepro-nerd-font-mono
 
-# Override system vim with macvim
-brew install macvim --with-override-system-vim
-brew link --overwrite macvim
+# brew tap ValeLint/vale
+# brew install vale
+
+defaults write com.dteoh.SlowQuitApps delay -int 1000
 
 # Install iTerm shell integration
 curl -L https://iterm2.com/misc/bash_startup.in -o $HOME/.iterm2_shell_integration.bash
