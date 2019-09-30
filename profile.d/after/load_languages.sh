@@ -3,7 +3,7 @@
 ####################
 
 # Source node, python, and ruby configurations
-for language in "node" "python" "ruby"; do
+for language in "node" "python"; do
   local language_loc="$DOTFILES/$language.d"
   source_dir $language_loc
 done

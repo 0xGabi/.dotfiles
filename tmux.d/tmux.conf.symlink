@@ -17,8 +17,8 @@ bind % split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
 
 # Map splits according to NERDTree's bindings and remap overriden bindings to uppercase
-bind i split-window -v -c "#{pane_current_path}"
-bind s split-window -h -c "#{pane_current_path}"
+# bind i split-window -v -c "#{pane_current_path}"
+# bind s split-window -h -c "#{pane_current_path}"
 
 # Map 'g' key to choose windows visually
 bind g choose-tree
@@ -29,6 +29,13 @@ bind r source-file $HOME/.tmux.conf
 # Map shift arrow to switch windows
 bind -n S-Left  previous-window
 bind -n S-Right next-window
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
 
 # Map copy mode
 bind v copy-mode

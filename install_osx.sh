@@ -93,6 +93,9 @@ defaults write com.apple.dock mru-spaces -bool false
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
+# Speed hide of Dock
+defaults write com.apple.dock autohide-time-modifier -float 0.1
+
 # Add a spacer to the left side of the Dock (where the applications are)
 #defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
 # Add a spacer to the right side of the Dock (where the Trash is)
@@ -181,7 +184,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 # XCode utilities #
 ###################
 
-sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+# sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
 
 
 ############
@@ -206,7 +209,6 @@ brew install \
     ack \
     ag \
     ansifilter \
-    ansiweather \
     bash \
     binutils \
     colordiff \
@@ -216,118 +218,111 @@ brew install \
     diff-so-fancy \
     diffutils \
     direnv \
-    docker-compose \
-    docker-machine \
-    editorconfig \
-    erlang \
     emojify \
     fasd \
     fd \
     ffmpeg \
     fortune \
-    gifsicle \
     git \
-    git-extras \
-    git-lfs \
     gnupg2 \
     gnu-tar \
     gpg \
-    go \
     grc \
     gzip \
-    htop \
-    hub \
-    imagemagick \
-    locateme \
-    mercurial \
-    mongodb \
-    mtr \
-    nmap \
-    openssl \
-    parallel \
-    perl \
-    pinentry-mac \
-    pgcli \
-    postgresql \
     pstree \
-    pyenv \
-    pyenv-virtualenv \
-    ranger \
-    readline \
     rename \
-    ripgrep \
-    rmtrash \
     tree \
     watch \
     wdiff \
-    wifi-password \
-    wget \
-    xz
+    wifi-password
+
+############
+#   TODO   #
+############
+
+    # docker-compose \
+    # docker-machine \
+    # editorconfig \
+    # erlang \
+    # git-extras \
+    # git-lfs \
+    # go \
+    # htop \
+    # hub \
+    # mercurial \
+    # mongodb \
+    # mtr \
+    # nmap \
+    # openssl \
+    # parallel \
+    # perl \
+    # pinentry-mac \
+    # pgcli \
+    # postgresql \
+    # pyenv \
+    # pyenv-virtualenv \
+    # readline \
+    # ripgrep \
+    # rmtrash \
+    # wget
 
 brew cask install \
-    1password \
-    aegisub \
-    alfred \
-    anki \
     appcleaner \
-    arq \
-    bartender \
     bettertouchtool \
-    beyond-compare \
     brave-browser \
-    charles \
     cheatsheet \
-    chrome-devtools \
-    chromium \
-    cyberduck \
-    discord \
-    docker \
-    dropbox \
-    fantastical \
-    firefox \
-    flow \
+    evernote \
     flux \
-    forklift \
-    franz \
-    ganache \
-    gimp \
     gitter \
-    google-chrome \
     gpg-suite \
-    grandperspective \
     haptic-touch-bar \
     iina \
     iterm2 \
     karabiner-elements \
     keybase \
-    linphone \
     little-snitch \
     macdown \
-    macs-fan-control \
-    mountain-duck \
-    namebench \
-    notion \
-    numi \
-    omnifocus \
     onyx \
-    opera \
-    paragon-ntfs \
-    private-internet-access \
-    rescuetime \
+    omnifocus \
     rocket-chat \
     signal \
     skype \
     spectacle \
-    steam \
-    telegram \
     the-unarchiver \
     time-out \
-    transmission \
     vimr \
     vlc \
-    virtualbox \
-    xquartz \
-    zoomus
+    virtualbox
+
+############
+#   TODO   #
+############
+
+    # 1password \
+    # alfred \
+    # anki \
+    # bartender \
+    # beyond-compare \
+    # charles \
+    # chrome-devtools \
+    # chromium \
+    # cyberduck \
+    # discord \
+    # docker \
+    # dropbox \
+    # fantastical \
+    # forklift \
+    # franz \
+    # ganache \
+    # google-chrome \
+    # notion \
+    # macs-fan-control \
+    # mountain-duck \
+    # opera \
+    # private-internet-access \
+    # telegram \
+    # transmission \
+    # zoomus
 
 # Install custom taps
 brew tap dteoh/sqa
@@ -335,11 +330,12 @@ brew cask install slowquitapps
 
 brew tap caskroom/fonts
 brew cask install \
+    font-fira-code \
     font-office-code-pro \
     font-sourcecodepro-nerd-font-mono
 
-brew tap ValeLint/vale
-brew install vale
+# brew tap ValeLint/vale
+# brew install vale
 
 defaults write com.dteoh.SlowQuitApps delay -int 1000
 

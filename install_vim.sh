@@ -24,7 +24,7 @@ echo
 npm install -g neovim
 pip2 install --user neovim
 pip3 install --user neovim
-gem install neovim
+# gem install neovim
 
 echo "Installing dein..."
 echo

@@ -99,8 +99,8 @@ echo "| Setting up the user |"
 echo "-----------------------"
 echo
 echo "Creating local file structure..."
-mkdir $HOME/Development
-mkdir $HOME/Development/github
+mkdir $HOME/Code
+mkdir $HOME/Code/github
 
 
 ###############
